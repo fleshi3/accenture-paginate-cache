@@ -16,3 +16,8 @@ html {
   grid-gap: 1rem;
   padding: 5rem 10rem;
 }
+
+.Pagination {
+        display: flex;
+        flex-flow: row nowrap;
+}

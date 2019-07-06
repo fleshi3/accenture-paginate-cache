@@ -1,7 +1,9 @@
 import {
   CARDS_FETCH,
   CARDS_FETCH_FAILED,
-  CARDS_FETCH_SUCCESS
+  CARDS_FETCH_SUCCESS,
+  INCREMENT_PAGE,
+  DECREMENT_PAGE
 } from "../actionTypes";
 
 const initialState = {
@@ -32,6 +34,16 @@ const testApp = (state = initialState, action) => {
         ...state,
         loading: false,
         data: action.payload
+      };
+    case INCREMENT_PAGE:
+      return {
+        ...state,
+        currentPage: state.currentPage + 1
+      };
+    case DECREMENT_PAGE:
+      return {
+        ...state,
+        currentPage: state.currentPage - 1 || 1
       };
     default:
       return state;
