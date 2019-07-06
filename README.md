@@ -10,3 +10,10 @@ __2019-07-06:__
 - Added Redux library & initial Redux skeleton
 - Added Material-UI Library and Roboto font to index.html
 - Added Redux-Saga & added middleware to Redux Store
+- Initial skeleton for saga API calls completed
+
+__2019-07-07:__
+- Difficulty with error catching using *fetch*, installing *axios* to fix error catching
+- Replaced *fetch* with *axios* error caching now working
+- Creating skeleton for mapping data to components
+

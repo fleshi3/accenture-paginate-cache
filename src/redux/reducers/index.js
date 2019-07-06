@@ -1,5 +1,4 @@
 import {
-  TEST_ACTION,
   CARDS_FETCH,
   CARDS_FETCH_FAILED,
   CARDS_FETCH_SUCCESS
@@ -8,7 +7,9 @@ import {
 const initialState = {
   data: [],
   loading: false,
-  error: ""
+  error: "",
+  currentPage: 1,
+  totalPages: 4
 };
 
 const testApp = (state = initialState, action) => {

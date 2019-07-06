@@ -1,9 +1,4 @@
-import {
-  TEST_ACTION,
-  CARDS_FETCH,
-  CARDS_FETCH_FAILED,
-  CARDS_FETCH_SUCCESS
-} from "../actionTypes";
+import { CARDS_FETCH_FAILED, CARDS_FETCH_SUCCESS } from "../actionTypes";
 
 export function cardsFetchSuccess(responseBody) {
   return {
