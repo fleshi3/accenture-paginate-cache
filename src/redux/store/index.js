@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import testApp from "../reducers/index";
 
 // Saga Imports
-import { fetchSaga } from "../../sagas/fetchSaga";
+import fetchSaga from "../../sagas/fetchSaga";
 // Init Redux-Saga
 const sagaMiddleWare = createSagaMiddleware();
 

@@ -1,13 +1,37 @@
-import { TEST_ACTION } from "../actionTypes";
+import {
+  TEST_ACTION,
+  CARDS_FETCH,
+  CARDS_FETCH_FAILED,
+  CARDS_FETCH_SUCCESS
+} from "../actionTypes";
 
 const initialState = {
-  counterValue: 0
+  data: [],
+  loading: false,
+  error: ""
 };
 
 const testApp = (state = initialState, action) => {
   switch (action.type) {
-    case TEST_ACTION:
-      return state.counterValue + 1;
+    case CARDS_FETCH:
+      return {
+        ...state,
+        loading: true,
+        data: []
+      };
+    case CARDS_FETCH_FAILED:
+      return {
+        ...state,
+        loading: true,
+        data: [],
+        error: action.error
+      };
+    case CARDS_FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload
+      };
     default:
       return state;
   }
