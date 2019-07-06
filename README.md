@@ -16,4 +16,6 @@ __2019-07-07:__
 - Difficulty with error catching using *fetch*, installing *axios* to fix error catching
 - Replaced *fetch* with *axios* error caching now working
 - Creating skeleton for mapping data to components
+- Replicated app mockup using material-ui library
+- Working on pagination
 
