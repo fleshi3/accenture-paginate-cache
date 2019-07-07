@@ -22,4 +22,6 @@ __2019-07-07:__
 - Changed .env to include *REACT_APP_BASE_URL* so that *axios* can use params from state selectors
 - Fixed issue regarding maximum totalPages incrementing beyond limit
 - Added logic statement to disable *NEXT* page button when totalPages reaches limit
+- Fixed issue where subsequent fetch requests would override eachother
+- Set correct value for totalPages
 

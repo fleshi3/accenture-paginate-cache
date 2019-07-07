@@ -13,7 +13,7 @@ const initialState = {
   loading: false,
   error: "",
   currentPage: 1,
-  totalPages: 4,
+  totalPages: 7,
   pageToBeFetched: 4 /* note: API uses "0" as the first page */,
   pageLimitReached: false
 };
@@ -53,14 +53,15 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: [...state.data, ...action.payload]
+              data: [...state.data, ...action.payload],
+              pageToBeFetched: state.pageToBeFetched + 1
       };
     case INCREMENT_PAGE:
       return {
         ...state,
         currentPage: state.currentPage + 1,
-        totalPages: limitPages(state.totalPages + 1, 1, 6),
-        pageToBeFetched: state.pageToBeFetched + 1
+              //          totalPages: limitPages(state.totalPages + 1, 1, 6),
+              //          pageToBeFetched: state.pageToBeFetched + 1
       };
     case DECREMENT_PAGE:
       return {

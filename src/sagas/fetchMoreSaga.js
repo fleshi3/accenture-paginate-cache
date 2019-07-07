@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select } from "redux-saga/effects";
+import { takeLatest, put, call, select, fork } from "redux-saga/effects";
 import axios from "axios";
 import { INCREMENT_PAGE } from "../redux/actionTypes";
 import {
