@@ -8,7 +8,7 @@ function* onCacheConditionsMet() {
     yield select(selectors.currentPage),
     yield select(selectors.endOfCache)
   ]);
-  if (currentPage >= endOfCache) {
+  if (currentPage > endOfCache) {
     yield put({ type: CARDS_FETCH_MORE });
   }
 }

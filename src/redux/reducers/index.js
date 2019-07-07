@@ -12,6 +12,7 @@ import {
 const initialState = {
   data: [],
   loading: false,
+  loadingMore: false,
   error: "",
   currentPage: 1,
   totalPages: 7,
@@ -42,7 +43,7 @@ const testApp = (state = initialState, action) => {
     case CARDS_FETCH_MORE:
       return {
         ...state,
-        loading: true
+        loadingMore: true
       };
     case CARDS_FETCH_MORE_FAILED:
       return {
@@ -54,10 +55,10 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        loadingMore: false,
         pageToBeFetched: state.pageToBeFetched + 1,
         endOfCache: state.endOfCache + 4,
         data: [...state.data, ...action.payload]
-        //  pageToBeFetched: state.pageToBeFetched + 1
       };
     case INCREMENT_PAGE:
       return {

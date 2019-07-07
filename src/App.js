@@ -29,6 +29,7 @@ const mapStateToProps = state => {
   return {
     data: state.data,
     loading: state.loading,
+    loadingMore: state.loadingMore,
     error: state.error,
     currentPage: state.currentPage,
     totalPages: state.totalPages
@@ -46,6 +47,7 @@ class App extends React.Component {
     const {
       data,
       loading,
+      loadingMore,
       currentPage,
       totalPages,
       incrementPage,
@@ -61,7 +63,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        {!loading ? (
+        {!loading && !loadingMore ? (
           <div className="ticketContainer">{ticketView}</div>
         ) : (
           <div className="loadingContainer">
