@@ -7,11 +7,17 @@ import { cardsFetchSuccess, cardsFetchFailed } from "../redux/actions/index";
 const callApi = () => {
   return axios({
     method: "get",
-    url: process.env.REACT_APP_API_URL,
+    url: process.env.REACT_APP_API_BASE_URL,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
       apiToken: process.env.REACT_APP_API_KEY
+    },
+    params: {
+      ticketType: "incident",
+      sortDirection: "DESC",
+      page: 0,
+      perPage: 48
     }
   });
 };

@@ -4,6 +4,8 @@ import testApp from "../reducers/index";
 
 // Saga Imports
 import fetchSaga from "../../sagas/fetchSaga";
+import rootSaga from "../../sagas/rootSaga";
+
 // Init Redux-Saga
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -14,6 +16,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleWare))
 );
 /* eslint-enable */
-sagaMiddleWare.run(fetchSaga);
+sagaMiddleWare.run(rootSaga);
 
 export default store;

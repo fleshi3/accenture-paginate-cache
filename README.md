@@ -18,4 +18,8 @@ __2019-07-07:__
 - Creating skeleton for mapping data to components
 - Replicated app mockup using material-ui library
 - Added working pagination logic and component
+- Added new fetch method for additional pages
+- Changed .env to include *REACT_APP_BASE_URL* so that *axios* can use params from state selectors
+- Fixed issue regarding maximum totalPages incrementing beyond limit
+- Added logic statement to disable *NEXT* page button when totalPages reaches limit
 

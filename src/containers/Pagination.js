@@ -2,6 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 class Pagination extends React.Component {
+  // When page limit is reached
+
   render() {
     const {
       currentPage,
@@ -15,7 +17,12 @@ class Pagination extends React.Component {
         <div className="currentPage">
           {currentPage} / {totalPages}
         </div>
-        <Button onClick={incrementPage}>NEXT</Button>
+        <Button
+          onClick={incrementPage}
+          disabled={currentPage === totalPages ? true : false}
+        >
+          NEXT
+        </Button>
       </div>
     );
   }
