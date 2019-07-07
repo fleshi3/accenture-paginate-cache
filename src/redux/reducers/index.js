@@ -53,15 +53,14 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+              pageToBeFetched: state.pageToBeFetched + 1,
               data: [...state.data, ...action.payload],
-              pageToBeFetched: state.pageToBeFetched + 1
+              //  pageToBeFetched: state.pageToBeFetched + 1
       };
     case INCREMENT_PAGE:
       return {
         ...state,
         currentPage: state.currentPage + 1,
-              //          totalPages: limitPages(state.totalPages + 1, 1, 6),
-              //          pageToBeFetched: state.pageToBeFetched + 1
       };
     case DECREMENT_PAGE:
       return {

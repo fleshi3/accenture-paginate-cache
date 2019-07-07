@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select, fork } from "redux-saga/effects";
+import { takeEvery, takeLatest,  take, put, call, select, fork } from "redux-saga/effects";
 import axios from "axios";
 import { INCREMENT_PAGE } from "../redux/actionTypes";
 import {
@@ -38,7 +38,6 @@ export default function* fetchMoreSaga() {
       yield put(cardsFetchMoreSuccess(responseBody));
     } catch (err) {
       yield put(cardsFetchMoreFailed(err));
-      console.log(err);
     }
   });
 }

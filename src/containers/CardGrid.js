@@ -6,9 +6,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const CardGrid = data => {
-  const { number, application, assignee, shortDescription } = data.coreData;
+  const { id, number, application, assignee, shortDescription } = data.coreData;
   return (
-    <Card className="ticketCard">
+    <Card className="ticketCard" key={id}>
       <CardContent>
         <Typography className="ticketStatus" color="textSecondary" gutterBottom>
           NEW
