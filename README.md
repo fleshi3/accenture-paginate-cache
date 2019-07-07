@@ -25,3 +25,8 @@ __2019-07-07:__
 - Fixed issue where subsequent fetch requests would override eachother
 - Set correct value for totalPages
 
+**2019-07-08:**
+- Added new sagas *cacheSagas* that watches for *INCREMENT_PAGE* and evaluates if *currentPage >= endOfCache*
+- Changed API request params to fetch 4 pages at a time to avoid unecessary API calls
+- Fixed CSS styling for ticket cards to be consistent across all tickets
+- Added conditional rendering that shows a loading spinner if *state.loading* evaluates to *true*

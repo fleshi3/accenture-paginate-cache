@@ -2,22 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 class Pagination extends React.Component {
-  // When page limit is reached
-        componentDidMount() {
-                const { incrementPage, decrementPage, currentPage, totalPages } = this.props;
-                window.onkeydown = function(e) {
-                        switch(e.keyCode) {
-                                case 39: 
-                                        if ( currentPage === 6 ) {
-                                                return null
-                                        } else {
-                                                return incrementPage();
-                                        }
-                                case 37:
-                                        return decrementPage();
-                        }};
-        }
-
   render() {
     const {
       currentPage,
@@ -27,14 +11,13 @@ class Pagination extends React.Component {
     } = this.props;
     return (
       <div className="Pagination">
-        <Button onClick={decrementPage}>BACK</Button>
+        <Button onClick={decrementPage} disabled={currentPage === 1}>
+          BACK
+        </Button>
         <div className="currentPage">
           {currentPage} / {totalPages}
         </div>
-        <Button
-          onClick={incrementPage}
-          disabled={currentPage === totalPages ? true : false}
-        >
+        <Button onClick={incrementPage} disabled={currentPage === totalPages}>
           NEXT
         </Button>
       </div>

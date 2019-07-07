@@ -1,15 +1,13 @@
-import { takeEvery, takeLatest,  take, put, call, select, fork } from "redux-saga/effects";
+import { takeLatest, put, call, select } from "redux-saga/effects";
 import axios from "axios";
-import { INCREMENT_PAGE } from "../redux/actionTypes";
+import { CARDS_FETCH_MORE } from "../redux/actionTypes";
 import {
   cardsFetchMoreSuccess,
   cardsFetchMoreFailed
 } from "../redux/actions/index";
 import * as selectors from "../redux/store/selectors";
 
-// Call totalPages selector for params
-
-// API call
+// API call (axios)
 const callApi = pageToBeFetched => {
   return axios({
     method: "get",
@@ -23,21 +21,32 @@ const callApi = pageToBeFetched => {
       ticketType: "incident",
       sortDirection: "DESC",
       page: pageToBeFetched,
-      perPage: 12
+      perPage: 48
     }
   });
 };
 
-// fetch saga (AXIOS)
-export default function* fetchMoreSaga() {
-  yield takeLatest(INCREMENT_PAGE, function* onFetchMoreCards() {
-    try {
-      const pageToBeFetched = yield select(selectors.pageToBeFetched);
-      const response = yield call(callApi, pageToBeFetched);
-      const responseBody = yield response.data;
-      yield put(cardsFetchMoreSuccess(responseBody));
-    } catch (err) {
-      yield put(cardsFetchMoreFailed(err));
-    }
-  });
+// FETCH_MORE_SAGA
+function* onFetchMoreCards() {
+  try {
+    const pageToBeFetched = yield select(selectors.pageToBeFetched);
+    const response = yield call(callApi, pageToBeFetched);
+    const responseBody = yield response.data;
+    yield put(cardsFetchMoreSuccess(responseBody));
+  } catch (err) {
+    yield put(cardsFetchMoreFailed(err)); /* caught errors update the state */
+  }
 }
+
+/* This function derrives the parameter "pageToBeFetched" from
+ * a state selector and passes it into the API fetch function as
+ * an argument. It then formats the response object to prepare it
+ * for the action creator. */
+
+// WATCHER_SAGA
+export default function* fetchMoreSaga() {
+  yield takeLatest(CARDS_FETCH_MORE, onFetchMoreCards);
+}
+
+/* Watches for instances of INCREMENT_PAGE before
+ * checking caching conditions. */

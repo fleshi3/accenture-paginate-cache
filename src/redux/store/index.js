@@ -3,7 +3,6 @@ import createSagaMiddleware from "redux-saga";
 import testApp from "../reducers/index";
 
 // Saga Imports
-import fetchSaga from "../../sagas/fetchSaga";
 import rootSaga from "../../sagas/rootSaga";
 
 // Init Redux-Saga

@@ -22,12 +22,12 @@ const CardGrid = data => {
         <Typography className="ticketAssignee" color="textSecondary">
           Assignee: {assignee}
         </Typography>
-        <Typography className="ticketDescription" variant="body1" component="p">
+        <Typography className="ticketDescription" variant="body2" component="p">
           {shortDescription}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button>LEARN MORE</Button>
+        <Button size="small">LEARN MORE</Button>
       </CardActions>
     </Card>
   );

@@ -1,6 +1,7 @@
 import {
   CARDS_FETCH_FAILED,
   CARDS_FETCH_SUCCESS,
+  CARDS_FETCH_MORE,
   CARDS_FETCH_MORE_FAILED,
   CARDS_FETCH_MORE_SUCCESS,
   INCREMENT_PAGE,
@@ -23,6 +24,11 @@ export function cardsFetchFailed(e) {
 }
 
 // Additional API requests
+export function cardsFetchMore() {
+  return {
+    type: CARDS_FETCH_MORE
+  };
+}
 export function cardsFetchMoreSuccess(responseBody) {
   return {
     type: CARDS_FETCH_MORE_SUCCESS,

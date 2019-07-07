@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CARDS_FETCH } from "./redux/actionTypes";
-import { incrementPage, decrementPage } from "./redux/actions/index";
+import {
+  incrementPage,
+  decrementPage,
+  cardsFetchMore
+} from "./redux/actions/index";
 import CardGrid from "./containers/CardGrid";
 import Pagination from "./containers/Pagination";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "./App.css";
 
 // REDUX: Mapping action creators to component as props
@@ -11,6 +16,8 @@ const mapDispatchToProps = dispatch => {
   return {
     // initial fetch of 4 pages
     initFetch: () => dispatch({ type: CARDS_FETCH }),
+    // additional fetch requests
+    fetchMore: () => dispatch(cardsFetchMore()),
     // pagination actions
     incrementPage: () => dispatch(incrementPage()),
     decrementPage: () => dispatch(decrementPage())
@@ -38,6 +45,7 @@ class App extends React.Component {
   render() {
     const {
       data,
+      loading,
       currentPage,
       totalPages,
       incrementPage,
@@ -53,7 +61,18 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="ticketContainer">{ticketView}</div>
+        {!loading ? (
+          <div className="ticketContainer">{ticketView}</div>
+        ) : (
+          <div className="loadingContainer">
+            <div className="spinnerContainer">
+              <CircularProgress color="secondary" size="100px" />
+            </div>
+            <div className="loadingTextContainer">
+              <span className="loadingText">Loading Tickets</span>
+            </div>
+          </div>
+        )}
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
