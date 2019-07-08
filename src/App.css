@@ -81,6 +81,16 @@ body {
         max-height: 240px;
 }
 
+.MuiDrawer-paper {
+        width: 40%;
+}
+
+.MuiFormLabel-root {
+        width: 20%;
+        margin-right: 1rem;
+        color: rgba(0,0,0,0);
+}
+
 .Pagination {
   position: relative;
   bottom: 0;

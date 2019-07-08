@@ -5,7 +5,9 @@ import {
   CARDS_FETCH_MORE_FAILED,
   CARDS_FETCH_MORE_SUCCESS,
   INCREMENT_PAGE,
-  DECREMENT_PAGE
+  DECREMENT_PAGE,
+  INSPECT_CARD,
+  DISMOUNT_CARD
 } from "../actionTypes";
 
 //  API requests
@@ -53,5 +55,20 @@ export function incrementPage() {
 export function decrementPage() {
   return {
     type: DECREMENT_PAGE
+  };
+}
+
+// Inspect card requests
+export function onInspectCard(cardData) {
+  return {
+    type: INSPECT_CARD,
+    payload: cardData
+  };
+}
+
+// Dismount card requests
+export function onDismountCard() {
+  return {
+    type: DISMOUNT_CARD
   };
 }

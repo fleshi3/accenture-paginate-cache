@@ -6,13 +6,20 @@ import {
   CARDS_FETCH_MORE_FAILED,
   CARDS_FETCH_MORE_SUCCESS,
   INCREMENT_PAGE,
-  DECREMENT_PAGE
+  DECREMENT_PAGE,
+  INSPECT_CARD,
+  DISMOUNT_CARD
 } from "../actionTypes";
 
 const initialState = {
   data: [],
+  inspectCard: {
+    coreData: {},
+    serviceData: {}
+  },
   loading: false,
   loadingMore: false,
+  inspecting: false,
   error: "",
   currentPage: 1,
   totalPages: 7,
@@ -69,6 +76,21 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         currentPage: state.currentPage - 1 || 1
+      };
+    case INSPECT_CARD:
+      return {
+        ...state,
+        inspecting: true,
+        inspectCard: action.payload
+      };
+    case DISMOUNT_CARD:
+      return {
+        ...state,
+        inspecting: false,
+        inspectCard: {
+          coreData: {},
+          serviceData: {}
+        }
       };
     default:
       return state;

@@ -5,8 +5,15 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const CardGrid = data => {
-  const { id, number, application, assignee, shortDescription } = data.coreData;
+const CardGrid = props => {
+  const { cardData, onInspectCard } = props;
+  const {
+    id,
+    number,
+    application,
+    assignee,
+    shortDescription
+  } = cardData.coreData;
   return (
     <Card className="ticketCard" key={id}>
       <CardContent>
@@ -27,7 +34,14 @@ const CardGrid = data => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">LEARN MORE</Button>
+        <Button
+          size="small"
+          onClick={() => {
+            return onInspectCard(cardData);
+          }}
+        >
+          LEARN MORE
+        </Button>
       </CardActions>
     </Card>
   );

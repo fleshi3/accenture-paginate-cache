@@ -31,3 +31,7 @@ __2019-07-07:__
 - Fixed CSS styling for ticket cards to be consistent across all tickets
 - Added conditional rendering that shows a loading spinner if *state.loading* evaluates to *true*
 - Added conditional styling so that when *currentPage===endOfCache* the loading spinner does not interrupt the current view
+- Added *action onInspectCard* that updates an empty object in state with the ticket card that was clicked
+- Added component *cardDrawer* that slides out when a ticket is being inspected for more information
+- Added *action onDismountCard* that dismounts the data in *cardDrawer* and closes the drawer
+- Added respective CSS styling for data in *cardDrawer* and added a on-click event for closing the component

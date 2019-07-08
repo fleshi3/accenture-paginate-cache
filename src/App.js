@@ -5,9 +5,12 @@ import { CARDS_FETCH } from "./redux/actionTypes";
 import {
   incrementPage,
   decrementPage,
-  cardsFetchMore
+  cardsFetchMore,
+  onInspectCard,
+  onDismountCard
 } from "./redux/actions/index";
 import CardGrid from "./containers/CardGrid";
+import CardDrawer from "./containers/CardDrawer";
 import Pagination from "./containers/Pagination";
 import "./App.css";
 
@@ -20,7 +23,10 @@ const mapDispatchToProps = dispatch => {
     fetchMore: () => dispatch(cardsFetchMore()),
     // pagination actions
     incrementPage: () => dispatch(incrementPage()),
-    decrementPage: () => dispatch(decrementPage())
+    decrementPage: () => dispatch(decrementPage()),
+    // inspect card actions
+    onInspectCard: cardData => dispatch(onInspectCard(cardData)),
+    onDismountCard: () => dispatch(onDismountCard())
   };
 };
 
@@ -28,6 +34,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     data: state.data,
+    inspectCard: state.inspectCard,
+    inspecting: state.inspecting,
     loading: state.loading,
     loadingMore: state.loadingMore,
     error: state.error,
@@ -54,6 +62,10 @@ class App extends React.Component {
       totalPages,
       incrementPage,
       decrementPage,
+      inspectCard,
+      inspecting,
+      onInspectCard,
+      onDismountCard,
       endOfCache
     } = this.props;
 
@@ -62,7 +74,9 @@ class App extends React.Component {
     const indexLastCard = currentPage * postPerPage;
     const indexFirstCard = indexLastCard - postPerPage;
     const currentCards = data.slice(indexFirstCard, indexLastCard);
-    const ticketView = currentCards.map(CardGrid);
+    const ticketView = currentCards.map(cardData => {
+      return <CardGrid cardData={cardData} onInspectCard={onInspectCard} />;
+    });
 
     return (
       <div className="App">
@@ -94,9 +108,12 @@ class App extends React.Component {
               <span className="loadingText">Loading Tickets</span>
             </div>
           </div>
-        ) : (
-          <div className="hiddenLoader" />
-        )}
+        ) : null}
+        <CardDrawer
+          inspectCard={inspectCard}
+          inspecting={inspecting}
+          onDismountCard={onDismountCard}
+        />
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
