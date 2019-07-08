@@ -31,6 +31,19 @@ body {
         flex-flow: column nowrap;
         height: 88.1%;
         width: 100%;
+        z-index: 0;
+        text-align: center;
+        justify-content: center;
+}
+
+.hiddenLoader {
+        position: fixed;
+        top: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        height: 88.1%;
+        width: 100%;
+        z-index: 0;
         text-align: center;
         justify-content: center;
 }
@@ -53,6 +66,7 @@ body {
 .ticketContainer {
   position: relative;
   height: 80%;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);

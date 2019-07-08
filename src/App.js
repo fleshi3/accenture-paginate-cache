@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { CARDS_FETCH } from "./redux/actionTypes";
 import {
   incrementPage,
@@ -8,7 +9,6 @@ import {
 } from "./redux/actions/index";
 import CardGrid from "./containers/CardGrid";
 import Pagination from "./containers/Pagination";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import "./App.css";
 
 // REDUX: Mapping action creators to component as props
@@ -32,7 +32,8 @@ const mapStateToProps = state => {
     loadingMore: state.loadingMore,
     error: state.error,
     currentPage: state.currentPage,
-    totalPages: state.totalPages
+    totalPages: state.totalPages,
+    endOfCache: state.endOfCache
   };
 };
 
@@ -44,6 +45,7 @@ class App extends React.Component {
   }
 
   render() {
+    // destructuring state variables
     const {
       data,
       loading,
@@ -51,7 +53,8 @@ class App extends React.Component {
       currentPage,
       totalPages,
       incrementPage,
-      decrementPage
+      decrementPage,
+      endOfCache
     } = this.props;
 
     // pagination method
@@ -63,8 +66,15 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        {!loading && !loadingMore ? (
-          <div className="ticketContainer">{ticketView}</div>
+        {!loading ? (
+          <div
+            className="ticketContainer"
+            style={{
+              background: currentPage === endOfCache ? "#eeeeee" : "transparent"
+            }}
+          >
+            {ticketView}
+          </div>
         ) : (
           <div className="loadingContainer">
             <div className="spinnerContainer">
@@ -74,6 +84,18 @@ class App extends React.Component {
               <span className="loadingText">Loading Tickets</span>
             </div>
           </div>
+        )}
+        {loadingMore ? (
+          <div className="hiddenLoader">
+            <div className="spinnerContainer">
+              <CircularProgress color="secondary" size="100px" />
+            </div>
+            <div className="loadingTextContainer">
+              <span className="loadingText">Loading Tickets</span>
+            </div>
+          </div>
+        ) : (
+          <div className="hiddenLoader" />
         )}
         <Pagination
           currentPage={currentPage}

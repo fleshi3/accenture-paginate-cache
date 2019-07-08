@@ -30,3 +30,4 @@ __2019-07-07:__
 - Changed API request params to fetch 4 pages at a time to avoid unecessary API calls
 - Fixed CSS styling for ticket cards to be consistent across all tickets
 - Added conditional rendering that shows a loading spinner if *state.loading* evaluates to *true*
+- Added conditional styling so that when *currentPage===endOfCache* the loading spinner does not interrupt the current view
