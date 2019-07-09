@@ -36,15 +36,15 @@ const mapDispatchToProps = dispatch => {
 /* --- REDUX: Mapping state to props --- */
 const mapStateToProps = state => {
   return {
-    data: state.data,
-    inspecting: state.inspecting,
-    inspectCard: state.inspectCard,
-    loading: state.loading,
-    loadingMore: state.loadingMore,
-    error: state.error,
-    currentPage: state.currentPage,
-    totalPages: state.totalPages,
-    endOfCache: state.endOfCache
+    data: state.cards.data,
+    inspecting: state.inspect.inspecting,
+    inspectCard: state.inspect.inspectCard,
+    loading: state.cards.loading,
+    loadingMore: state.cards.loadingMore,
+    error: state.cards.error,
+    currentPage: state.pages.currentPage,
+    totalPages: state.cards.totalPages,
+    endOfCache: state.cards.endOfCache
   };
 };
 

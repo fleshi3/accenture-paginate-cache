@@ -1,5 +1,5 @@
-export const currentPage = state => state.currentPage;
-export const totalPages = state => state.totalPages;
-export const cardsPerPage = state => state.cardsPerPage;
-export const pageToBeFetched = state => state.pageToBeFetched;
-export const endOfCache = state => state.endOfCache;
+export const currentPage = state => state.pages.currentPage;
+export const totalPages = state => state.cards.totalPages;
+export const cardsPerPage = state => state.pages.cardsPerPage;
+export const pageToBeFetched = state => state.cards.pageToBeFetched;
+export const endOfCache = state => state.cards.endOfCache;

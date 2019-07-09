@@ -1,41 +1,26 @@
-import { combineReducers } from "redux";
-import cards from "./cards";
-import pages from "./pages";
-import inspect from "./inspect";
+/* --- IMPORT: Action Types --- */
 import {
   CARDS_FETCH,
   CARDS_FETCH_FAILED,
   CARDS_FETCH_SUCCESS,
   CARDS_FETCH_MORE,
   CARDS_FETCH_MORE_FAILED,
-  CARDS_FETCH_MORE_SUCCESS,
-  INCREMENT_PAGE,
-  DECREMENT_PAGE,
-  INSPECT_CARD,
-  DISMOUNT_CARD
+  CARDS_FETCH_MORE_SUCCESS
 } from "../actionTypes";
 
+/* --- INITIAL STATE --- */
 const initialState = {
   data: [],
-  inspectCard: {},
   loading: false,
   loadingMore: false,
-  inspecting: false,
   error: "",
-  currentPage: 1,
   totalPages: null,
-  cardsPerPage: 12,
-  pageToBeFetched: 0 /* note: API uses "0" as the first page */,
-  endOfCache: 6
+  pageToBeFetched: 0 /* Note: API uses "0" as the first page */,
+  endOfCache: 6 /* Note: No. of pages are cached at a time */
 };
 
-const rootReducer = combineReducers({
-  cards,
-  pages,
-  inspect
-});
-
-const testApp = (state = initialState, action) => {
+/* --- REDUCER: Handles fetch requests and updates total pages --- */
+const cards = (state = initialState, action) => {
   switch (action.type) {
     case CARDS_FETCH:
       return {
@@ -74,36 +59,14 @@ const testApp = (state = initialState, action) => {
         loadingMore: false,
         pageToBeFetched: state.pageToBeFetched + 1,
         endOfCache: state.endOfCache + 6,
-        data: [...state.data, ...action.payload]
-      };
-    case INCREMENT_PAGE:
-      return {
-        ...state,
-        currentPage: state.currentPage + 1
-      };
-    case DECREMENT_PAGE:
-      return {
-        ...state,
-        currentPage: state.currentPage - 1 || 1
-      };
-    case INSPECT_CARD:
-      return {
-        ...state,
-        inspecting: true,
-        inspectCard: action.payload
-      };
-    case DISMOUNT_CARD:
-      return {
-        ...state,
-        inspecting: false,
-        inspectCard: {
-          coreData: {},
-          serviceData: {}
-        }
+        data: [
+          ...state.data,
+          ...action.payload
+        ] /* previousState and incoming cards are spread */
       };
     default:
       return state;
   }
 };
 
-export default rootReducer;
+export default cards;

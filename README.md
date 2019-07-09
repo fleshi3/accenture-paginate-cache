@@ -39,6 +39,7 @@ __2019-07-07:__
 __2019-07-09:__
 - Added new logic for calculating total pages using response header *x-total-count*
 - Fixed issue where advancing the pages too quickly would go beyond the next cache of pages
-- Destructuring and formatting complete
-- write test files
+- Destructuring and formatting completed for components
+- Destructured Redux reducers and combined into *rootReducer*, selectors also updated
+- TODO: Write test files
 
