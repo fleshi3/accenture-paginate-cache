@@ -13,10 +13,7 @@ import {
 
 const initialState = {
   data: [],
-  inspectCard: {
-    coreData: {},
-    serviceData: {}
-  },
+  inspectCard: {},
   loading: false,
   loadingMore: false,
   inspecting: false,

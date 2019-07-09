@@ -1,6 +1,6 @@
+/* --- IMPORT: React & Redux --- */
 import React from "react";
 import { connect } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { CARDS_FETCH } from "./redux/actionTypes";
 import {
   incrementPage,
@@ -9,15 +9,18 @@ import {
   onInspectCard,
   onDismountCard
 } from "./redux/actions/index";
+/* --- IMPORT: Components and Containers --- */
 import CardGrid from "./containers/CardGrid";
 import CardDrawer from "./containers/CardDrawer";
 import Pagination from "./containers/Pagination";
+import Loading from "./components/Loading";
+/* --- IMPORT: Stylesheets --- */
 import "./App.css";
 
-// REDUX: Mapping action creators to component as props
+/* --- REDUX: Mapping actions to props --- */
 const mapDispatchToProps = dispatch => {
   return {
-    // initial fetch of 4 pages
+    // initial fetch
     initFetch: () => dispatch({ type: CARDS_FETCH }),
     // additional fetch requests
     fetchMore: () => dispatch(cardsFetchMore()),
@@ -30,12 +33,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-//  REDUX: Mapping store to component as props
+/* --- REDUX: Mapping state to props --- */
 const mapStateToProps = state => {
   return {
     data: state.data,
-    inspectCard: state.inspectCard,
     inspecting: state.inspecting,
+    inspectCard: state.inspectCard,
     loading: state.loading,
     loadingMore: state.loadingMore,
     error: state.error,
@@ -45,15 +48,15 @@ const mapStateToProps = state => {
   };
 };
 
+/* --- REACT: App Component --- */
 class App extends React.Component {
-  // COMPONENT LIFE-CYCLE: Calling 'CARDS_FETCH' action as soon as component mounts
   componentDidMount() {
     const { initFetch } = this.props;
-    initFetch();
+    initFetch(); // CARDS_FETCH action is called when component mounts
   }
 
   render() {
-    // destructuring state variables
+    /* --- FORMATTING: Destructuring Statements --- */
     const {
       data,
       loading,
@@ -62,14 +65,14 @@ class App extends React.Component {
       totalPages,
       incrementPage,
       decrementPage,
-      inspectCard,
       inspecting,
+      inspectCard,
       onInspectCard,
       onDismountCard,
       endOfCache
     } = this.props;
 
-    // pagination method
+    /* --- METHOD: Pagination --- */
     const postPerPage = 12;
     const indexLastCard = currentPage * postPerPage;
     const indexFirstCard = indexLastCard - postPerPage;
@@ -78,49 +81,33 @@ class App extends React.Component {
       return <CardGrid cardData={cardData} onInspectCard={onInspectCard} />;
     });
 
+    /* --- FORMATTING: Props --- */
+    /* --- NOTE:Background of CardGrid is changed to #eeeeee when currentPage === endOfCache to hide loading spinner --- */
+    const ticketContainerStyle = {
+      background: currentPage === endOfCache ? "#eeeeee" : "transparent"
+    };
+    const cardDrawerProps = { inspectCard, inspecting, onDismountCard };
+    const paginationProps = {
+      currentPage,
+      totalPages,
+      endOfCache,
+      incrementPage,
+      decrementPage
+    };
+
+    /* --- JSX --- */
     return (
       <div className="App">
         {!loading ? (
-          <div
-            className="ticketContainer"
-            style={{
-              background: currentPage === endOfCache ? "#eeeeee" : "transparent"
-            }}
-          >
+          <div className="ticketContainer" style={ticketContainerStyle}>
             {ticketView}
           </div>
         ) : (
-          <div className="loadingContainer">
-            <div className="spinnerContainer">
-              <CircularProgress color="secondary" size="100px" />
-            </div>
-            <div className="loadingTextContainer">
-              <span className="loadingText">Loading Tickets</span>
-            </div>
-          </div>
+          <Loading />
         )}
-        {loadingMore ? (
-          <div className="hiddenLoader">
-            <div className="spinnerContainer">
-              <CircularProgress color="secondary" size="100px" />
-            </div>
-            <div className="loadingTextContainer">
-              <span className="loadingText">Loading Tickets</span>
-            </div>
-          </div>
-        ) : null}
-        <CardDrawer
-          inspectCard={inspectCard}
-          inspecting={inspecting}
-          onDismountCard={onDismountCard}
-        />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          incrementPage={incrementPage}
-          decrementPage={decrementPage}
-          endOfCache={endOfCache}
-        />
+        {loadingMore ? <Loading /> : null}
+        <CardDrawer {...cardDrawerProps} />
+        <Pagination {...paginationProps} />
       </div>
     );
   }

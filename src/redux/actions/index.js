@@ -63,7 +63,7 @@ export function decrementPage() {
 export function onInspectCard(cardData) {
   return {
     type: INSPECT_CARD,
-    payload: cardData
+    payload: cardData.allFields
   };
 }
 
