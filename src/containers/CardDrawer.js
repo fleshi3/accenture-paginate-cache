@@ -33,7 +33,8 @@ const CardDrawer = props => {
 
   return (
     <Drawer className="CardDrawer" anchor="right" open={inspecting}>
-      <div style={flexRow}>
+      <div className="listTitle" style={flexRow}>
+        <span className="test">test</span>
         <Typography variant="h3" style={{ padding: "16px" }}>
           {number}
         </Typography>
