@@ -11,10 +11,11 @@ import {
 } from "../actionTypes";
 
 //  API requests
-export function cardsFetchSuccess(responseBody) {
+export function cardsFetchSuccess(response, totalPages) {
   return {
     type: CARDS_FETCH_SUCCESS,
-    payload: responseBody
+    payload: response.data,
+    totalPages
   };
 }
 

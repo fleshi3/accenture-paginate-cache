@@ -119,6 +119,7 @@ class App extends React.Component {
           totalPages={totalPages}
           incrementPage={incrementPage}
           decrementPage={decrementPage}
+          endOfCache={endOfCache}
         />
       </div>
     );

@@ -1,7 +1,8 @@
-import { takeLatest, put, call } from "redux-saga/effects";
+import { takeLatest, put, call, select } from "redux-saga/effects";
 import axios from "axios";
 import { CARDS_FETCH } from "../redux/actionTypes";
 import { cardsFetchSuccess, cardsFetchFailed } from "../redux/actions/index";
+import * as selectors from "../redux/store/selectors";
 
 // API call
 const callApi = () => {
@@ -17,18 +18,25 @@ const callApi = () => {
       ticketType: "incident",
       sortDirection: "DESC",
       page: 0,
-      perPage: 48
+      perPage: 72
     }
   });
+};
+
+// Calculate total pages from response header
+const calcTotalPages = (response, cardsPerPage) => {
+  const xTotalCount = parseInt(response.headers["x-total-count"], 10);
+  return Math.ceil(xTotalCount / cardsPerPage);
 };
 
 // fetch saga (AXIOS)
 export default function* fetchSaga() {
   yield takeLatest(CARDS_FETCH, function* onFetchCards() {
     try {
+      const cardsPerPage = yield select(selectors.cardsPerPage);
       const response = yield call(callApi);
-      const responseBody = yield response.data;
-      yield put(cardsFetchSuccess(responseBody));
+      const totalPages = yield call(calcTotalPages, response, cardsPerPage);
+      yield put(cardsFetchSuccess(response, totalPages));
     } catch (err) {
       yield put(cardsFetchFailed(err));
     }

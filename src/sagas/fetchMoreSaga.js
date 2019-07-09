@@ -21,7 +21,7 @@ const callApi = pageToBeFetched => {
       ticketType: "incident",
       sortDirection: "DESC",
       page: pageToBeFetched,
-      perPage: 48
+      perPage: 72
     }
   });
 };
@@ -45,7 +45,10 @@ function* onFetchMoreCards() {
 
 // WATCHER_SAGA
 export default function* fetchMoreSaga() {
-  yield takeLatest(CARDS_FETCH_MORE, onFetchMoreCards);
+  yield takeLatest(
+    CARDS_FETCH_MORE,
+    onFetchMoreCards
+  ); /* each call of CARDS_FETCH_MORE is forked */
 }
 
 /* Watches for instances of INCREMENT_PAGE before

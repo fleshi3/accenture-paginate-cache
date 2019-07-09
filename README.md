@@ -35,3 +35,10 @@ __2019-07-07:__
 - Added component *cardDrawer* that slides out when a ticket is being inspected for more information
 - Added *action onDismountCard* that dismounts the data in *cardDrawer* and closes the drawer
 - Added respective CSS styling for data in *cardDrawer* and added a on-click event for closing the component
+
+__2019-07-09:__
+- Added new logic for calculating total pages using response header *x-total-count*
+- Fixed issue where advancing the pages too quickly would go beyond the next cache of pages
+- destructure and clean up code
+- write test files
+

@@ -22,9 +22,11 @@ const initialState = {
   inspecting: false,
   error: "",
   currentPage: 1,
-  totalPages: 7,
-  pageToBeFetched: 1 /* note: API uses "0" as the first page */,
-  endOfCache: 4
+  totalPages: null,
+  cardsPerPage: 12,
+  pageToBeFetched: 0 /* note: API uses "0" as the first page */,
+  endOfCache: 6,
+  xTotalCount: null
 };
 
 const testApp = (state = initialState, action) => {
@@ -45,7 +47,9 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload
+        data: action.payload,
+        totalPages: action.totalPages,
+        pageToBeFetched: state.pageToBeFetched + 1
       };
     case CARDS_FETCH_MORE:
       return {
@@ -61,10 +65,9 @@ const testApp = (state = initialState, action) => {
     case CARDS_FETCH_MORE_SUCCESS:
       return {
         ...state,
-        loading: false,
         loadingMore: false,
         pageToBeFetched: state.pageToBeFetched + 1,
-        endOfCache: state.endOfCache + 4,
+        endOfCache: state.endOfCache + 6,
         data: [...state.data, ...action.payload]
       };
     case INCREMENT_PAGE:

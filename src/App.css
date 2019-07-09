@@ -8,10 +8,10 @@ html {
 }
 
 body {
-        margin: 0;
-        border: 0;
-        height: 100%;
-        width: 100%;
+  margin: 0;
+  border: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .App {
@@ -26,41 +26,41 @@ body {
 }
 
 .loadingContainer {
-        position: relative;
-        display: flex;
-        flex-flow: column nowrap;
-        height: 88.1%;
-        width: 100%;
-        z-index: 0;
-        text-align: center;
-        justify-content: center;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 88.1%;
+  width: 100%;
+  z-index: 0;
+  text-align: center;
+  justify-content: center;
 }
 
 .hiddenLoader {
-        position: fixed;
-        top: 0;
-        display: flex;
-        flex-flow: column nowrap;
-        height: 88.1%;
-        width: 100%;
-        z-index: 0;
-        text-align: center;
-        justify-content: center;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 88.1%;
+  width: 100%;
+  z-index: 0;
+  text-align: center;
+  justify-content: center;
 }
 
 .loadingText {
-        vertical-align: center;
-        font-size: 2rem;
-        letter-spacing: 2px;
+  vertical-align: center;
+  font-size: 2rem;
+  letter-spacing: 2px;
 }
 
 .loadingTextContainer {
-        height: auto;
-        margin-top: 2rem;
+  height: auto;
+  margin-top: 2rem;
 }
 
 .spinnerContainer {
-        height: 100px;
+  height: 100px;
 }
 
 .ticketContainer {
@@ -76,19 +76,19 @@ body {
 }
 
 .ticketCard {
-        min-width: 275px;
-        min-height: 240px;
-        max-height: 240px;
+  min-width: 275px;
+  min-height: 240px;
+  max-height: 240px;
 }
 
 .MuiDrawer-paper {
-        width: 40%;
+  width: 40%;
 }
 
 .MuiFormLabel-root {
-        width: 20%;
-        margin-right: 1rem;
-        color: rgba(0,0,0,0);
+  width: 20%;
+  margin-right: 1rem;
+  color: rgba(0, 0, 0, 0);
 }
 
 .Pagination {
@@ -104,5 +104,11 @@ body {
 
 .currentPage {
   padding: 0 2rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   line-height: 30px;
 }
