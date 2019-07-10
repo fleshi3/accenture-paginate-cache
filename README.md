@@ -20,15 +20,15 @@
 - Replicated app mockup using material-ui library
 - Added working pagination logic and component
 - Added new fetch method for additional pages
-- Changed .env to include _REACT_APP_BASE_URL_ so that _axios_ can use params from state selectors
+- Changed .env to include REACT APP BASE URL so that _axios_ can use params from state selectors
 - Fixed issue regarding maximum totalPages incrementing beyond limit
 - Added logic statement to disable _NEXT_ page button when totalPages reaches limit
 - Fixed issue where subsequent fetch requests would override eachother
 - Set correct value for totalPages
 
-**2019-07-08:**
+__2019-07-08:__
 
-- Added new sagas _cacheSagas_ that watches for _INCREMENT_PAGE_ and evaluates if _currentPage >= endOfCache_
+- Added new sagas _cacheSagas_ that watches for _INCREMENT_PAGE and evaluates if *currentPage >= endOfCache*
 - Changed API request params to fetch 4 pages at a time to avoid unecessary API calls
 - Fixed CSS styling for ticket cards to be consistent across all tickets
 - Added conditional rendering that shows a loading spinner if _state.loading_ evaluates to _true_
@@ -44,5 +44,4 @@
 - Fixed issue where advancing the pages too quickly would go beyond the next cache of pages
 - Destructuring and formatting completed for components
 - Destructured Redux reducers and combined into _rootReducer_, selectors also updated
-- TODO: Write test files
-- Added Enzyme library to assist with testing MaterialUI components
+- Added jest test files for component testing

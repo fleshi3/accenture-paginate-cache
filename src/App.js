@@ -77,8 +77,16 @@ class App extends React.Component {
     const indexLastCard = currentPage * postPerPage;
     const indexFirstCard = indexLastCard - postPerPage;
     const currentCards = data.slice(indexFirstCard, indexLastCard);
+
+    /* --- METHOD: Mapping through paginated items --- */
     const ticketView = currentCards.map(cardData => {
-      return <CardGrid cardData={cardData} onInspectCard={onInspectCard} />;
+      return (
+        <CardGrid
+          cardData={cardData}
+          onInspectCard={onInspectCard}
+          key={cardData.coreData.id}
+        />
+      );
     });
 
     /* --- FORMATTING: Props --- */

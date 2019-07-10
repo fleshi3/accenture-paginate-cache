@@ -1,11 +1,15 @@
+/* --- IMPORT: React & ReactDOM --- */
 import React from "react";
 import ReactDOM from "react-dom";
 import { create } from "react-test-renderer";
+/* --- IMPORT: REDUX store --- */
 import { Provider } from "react-redux";
 import store from "./redux/store/index";
+/* --- IMPORT: Test Components --- */
 import App from "./App";
 
-describe("App component", () => {
+/* --- TESTS --- */
+describe("Component rendering", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
@@ -17,7 +21,7 @@ describe("App component", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  it("has access to redux store", () => {
+  it("initialises redux store on mount", () => {
     const component = create(
       <Provider store={store}>
         <App />

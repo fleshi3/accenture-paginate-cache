@@ -20,7 +20,6 @@ const testApp = (state = initialState, action) => {
       return {
         ...state,
         inspecting: false,
-        inspectCard: {}
       };
     default:
       return state;

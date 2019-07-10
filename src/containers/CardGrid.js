@@ -23,9 +23,7 @@ const CardGrid = props => {
   const ticketDescription = { variant: "body2", component: "p" };
   const ticketButton = {
     size: "small",
-    onClick: () => {
-      return onInspectCard(cardData);
-    }
+    onClick: () => onInspectCard(cardData)
   };
 
   return (
