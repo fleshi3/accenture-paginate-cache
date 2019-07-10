@@ -1,5 +1,8 @@
+/* --- IMPORT: REDUX --- */
 import { takeLatest, put, call, select } from "redux-saga/effects";
-import axios from "axios";
+/* --- IMPORT: API --- */
+import { callApi } from "../api/callApi";
+/* --- IMPORT: Actions & Redux selectors --- */
 import { CARDS_FETCH_MORE } from "../redux/actionTypes";
 import {
   cardsFetchMoreSuccess,
@@ -7,27 +10,8 @@ import {
 } from "../redux/actions/index";
 import * as selectors from "../redux/store/selectors";
 
-// API call (axios)
-const callApi = pageToBeFetched => {
-  return axios({
-    method: "get",
-    url: process.env.REACT_APP_API_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      apiToken: process.env.REACT_APP_API_KEY
-    },
-    params: {
-      ticketType: "incident",
-      sortDirection: "DESC",
-      page: pageToBeFetched,
-      perPage: 72
-    }
-  });
-};
-
-// FETCH_MORE_SAGA
-function* onFetchMoreCards() {
+/* --- SAGA: API call & Action dispatch --- */
+export function* onFetchMoreCards() {
   try {
     const pageToBeFetched = yield select(selectors.pageToBeFetched);
     const response = yield call(callApi, pageToBeFetched);
@@ -43,13 +27,10 @@ function* onFetchMoreCards() {
  * an argument. It then formats the response object to prepare it
  * for the action creator. */
 
-// WATCHER_SAGA
+/* --- SAGA: CARDS_FETCH_MORE watcher --- */
 export default function* fetchMoreSaga() {
   yield takeLatest(
     CARDS_FETCH_MORE,
     onFetchMoreCards
-  ); /* each call of CARDS_FETCH_MORE is forked */
+  ); /* the latest call of CARDS_FETCH_MORE is forked */
 }
-
-/* Watches for instances of INCREMENT_PAGE before
- * checking caching conditions. */

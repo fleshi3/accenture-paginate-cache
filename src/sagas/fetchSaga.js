@@ -1,44 +1,32 @@
+/* --- IMPORT: REDUX SAGA --- */
 import { takeLatest, put, call, select } from "redux-saga/effects";
-import axios from "axios";
+/* --- IMPORT: API --- */
+import { callApi } from "../api/callApi";
+/* --- IMPORT: Actions and Redux selectors --- */
 import { CARDS_FETCH } from "../redux/actionTypes";
 import { cardsFetchSuccess, cardsFetchFailed } from "../redux/actions/index";
 import * as selectors from "../redux/store/selectors";
 
-// API call
-const callApi = () => {
-  return axios({
-    method: "get",
-    url: process.env.REACT_APP_API_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      apiToken: process.env.REACT_APP_API_KEY
-    },
-    params: {
-      ticketType: "incident",
-      sortDirection: "DESC",
-      page: 0,
-      perPage: 72
-    }
-  });
-};
-
-// Calculate total pages from response header
-const calcTotalPages = (response, cardsPerPage) => {
+/* --- METHOD: Calculate total pages from response header --- */
+export const calcTotalPages = (response, cardsPerPage) => {
   const xTotalCount = parseInt(response.headers["x-total-count"], 10);
   return Math.ceil(xTotalCount / cardsPerPage);
 };
 
-// fetch saga (AXIOS)
+/* --- SAGA: API call & Action dispatch --- */
+export function* onFetchCards() {
+  try {
+    const pageToBeFetched = yield select(selectors.pageToBeFetched);
+    const cardsPerPage = yield select(selectors.cardsPerPage);
+    const response = yield call(callApi, pageToBeFetched);
+    const totalPages = yield call(calcTotalPages, response, cardsPerPage);
+    yield put(cardsFetchSuccess(response, totalPages));
+  } catch (err) {
+    yield put(cardsFetchFailed(err));
+  }
+}
+
+/* --- SAGA: CARDS_FETCH Watcher --- */
 export default function* fetchSaga() {
-  yield takeLatest(CARDS_FETCH, function* onFetchCards() {
-    try {
-      const cardsPerPage = yield select(selectors.cardsPerPage);
-      const response = yield call(callApi);
-      const totalPages = yield call(calcTotalPages, response, cardsPerPage);
-      yield put(cardsFetchSuccess(response, totalPages));
-    } catch (err) {
-      yield put(cardsFetchFailed(err));
-    }
-  });
+  yield takeLatest(CARDS_FETCH, onFetchCards);
 }

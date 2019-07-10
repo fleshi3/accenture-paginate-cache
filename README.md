@@ -49,3 +49,8 @@ __2019-07-10:__
 - Added jest test files for component testing
 - Added jest test files for action creators
 - Added jest test files for reducers
+- Added saga testing library *redux-saga-test-plan* 
+- Added jest test files for saga middleware
+
+__2019-07-11:__
+- TODO: Write dockerfile, bash script and README
