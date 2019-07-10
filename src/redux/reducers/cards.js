@@ -31,7 +31,6 @@ const cards = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        data: [],
         error: action.error
       };
     case CARDS_FETCH_SUCCESS:
@@ -50,7 +49,7 @@ const cards = (state = initialState, action) => {
     case CARDS_FETCH_MORE_FAILED:
       return {
         ...state,
-        loading: true,
+        loadingMore: true,
         error: action.error
       };
     case CARDS_FETCH_MORE_SUCCESS:

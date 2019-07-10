@@ -44,4 +44,8 @@ __2019-07-08:__
 - Fixed issue where advancing the pages too quickly would go beyond the next cache of pages
 - Destructuring and formatting completed for components
 - Destructured Redux reducers and combined into _rootReducer_, selectors also updated
+
+__2019-07-10:__
 - Added jest test files for component testing
+- Added jest test files for action creators
+- Added jest test files for reducers
