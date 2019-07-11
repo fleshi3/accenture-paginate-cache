@@ -224,3 +224,4 @@ __2019-07-11:__
 - Added bash scripts to simplify running the app
 - Updated README.md with algorithims and methodology
 - Added diagram to README.md
+- Added missing prop type validation

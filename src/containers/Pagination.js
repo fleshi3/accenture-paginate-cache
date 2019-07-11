@@ -1,5 +1,7 @@
 /* --- IMPORT: React --- */
 import React from "react";
+/* --- IMPORT: PropTypes library --- */
+import PropTypes from "prop-types";
 /* --- IMPORT: Material UI --- */
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -31,6 +33,14 @@ const Pagination = props => {
       <Button {...pageForward}>NEXT</Button>
     </div>
   );
+};
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number,
+  totalPages: PropTypes.number,
+  endOfCache: PropTypes.number,
+  incrementPage: PropTypes.func,
+  decrementPage: PropTypes.func
 };
 
 export default Pagination;

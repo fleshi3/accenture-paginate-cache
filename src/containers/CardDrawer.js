@@ -1,5 +1,7 @@
 /* --- IMPORT: React --- */
 import React from "react";
+/* --- IMPORT: PropTypes library --- */
+import PropTypes from "prop-types";
 /* --- IMPORT: Material UI --- */
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -87,6 +89,12 @@ const CardDrawer = props => {
       </List>
     </Drawer>
   );
+};
+
+CardDrawer.propTypes = {
+  inspectCard: PropTypes.object,
+  inspecting: PropTypes.bool,
+  onDismountCard: PropTypes.func
 };
 
 export default CardDrawer;

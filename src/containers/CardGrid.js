@@ -1,5 +1,7 @@
 /* --- IMPORT: React --- */
 import React from "react";
+/* --- IMPORT: PropTypes library --- */
+import PropTypes from "prop-types";
 /* --- IMPORT: Material UI --- */
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -50,6 +52,11 @@ const CardGrid = props => {
       </CardActions>
     </Card>
   );
+};
+
+CardGrid.propTypes = {
+  cardData: PropTypes.object,
+  onInspectCard: PropTypes.func
 };
 
 export default CardGrid;

@@ -1,6 +1,9 @@
 /* --- IMPORT: React & Redux --- */
 import React from "react";
 import { connect } from "react-redux";
+/* --- IMPORT: PropTypes library --- */
+import PropTypes from "prop-types";
+/* --- IMPORT: Redux Actions --- */
 import { CARDS_FETCH } from "./redux/actionTypes";
 import {
   incrementPage,
@@ -120,6 +123,21 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  data: PropTypes.array,
+  loading: PropTypes.bool,
+  loadingMore: PropTypes.bool,
+  currentPage: PropTypes.number,
+  totalPages: PropTypes.number,
+  incrementPage: PropTypes.func,
+  decrementPage: PropTypes.func,
+  inspecting: PropTypes.bool,
+  inspectCard: PropTypes.object,
+  onInspectCard: PropTypes.func,
+  onDismountCard: PropTypes.func,
+  endOfCache: PropTypes.number
+};
 
 export default connect(
   mapStateToProps,
