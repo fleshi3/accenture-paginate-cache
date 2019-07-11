@@ -53,4 +53,5 @@ __2019-07-10:__
 - Added jest test files for saga middleware
 
 __2019-07-11:__
-- TODO: Write dockerfile, bash script and README
+- Added dockerfile, docker-compose.yml and scripts folder
+- Added bash scripts to simplify running the app

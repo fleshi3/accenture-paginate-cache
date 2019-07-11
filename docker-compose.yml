@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  build:
+    container_name: accenture-build
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+  test:
+    container_name: accenture-test
+    build:
+      context: .
+    environment:
+      - CI=true
+    command: npm run test
