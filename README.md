@@ -37,7 +37,7 @@ docker run -it -p 80:80 --rm accenture-paginate-cache:build
 bash ./run.sh
 OR 
 #in root directory
-docker-compose -f docker-compose.yml .
+docker-compose -f docker-compose.yml . -d --build
 ~~~~
 
 ##### Run as development:
